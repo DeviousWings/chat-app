@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import NavigationContainer from "./nav/nav-container";
 import Home from "./pages/home";
@@ -13,9 +13,9 @@ export default class App extends Component {
           <div>
             <NavigationContainer />
 
-            <Switch>
+            <Routes>
               <Route exact path='/' component={Home} />
-            </Switch>
+            </Routes>
           </div>
         </Router>
 
