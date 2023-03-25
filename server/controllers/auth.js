@@ -11,21 +11,21 @@ const app_id = process.env.STREAM_APP_ID;
 
 const signup = async (req, res) => {
   try {
-    const { fullName, username, passowrd, phoneNumber } = req.body;
+    const { fullName, username, password, phoneNumber } = req.body;
 
     const userId = crypto.randomBytes(16).toString("hex");
 
-    const severClient = connect(api_key, api_secret, app_id);
+    const serverClient = connect(api_key, api_secret, app_id);
 
-    const hashedPassword = await bcrypt.hash(password, 10); //The ten specifies the level of encryption
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const token = serverClient.createUserToken(userId);
 
     res
       .status(200)
-      .json({ token, password, username, userId, hashedPassword, phoneNumber });
+      .json({ token, fullName, username, userId, hashedPassword, phoneNumber });
   } catch (error) {
-    console.log(error); //sending data to the front end
+    console.log(error);
 
     res.status(500).json({ message: error });
   }
@@ -41,11 +41,11 @@ const login = async (req, res) => {
     const { users } = await client.queryUsers({ name: username });
 
     if (!users.length)
-      return res.status(400).json({ message: "User not found" }); //Querying the user from the data base
+      return res.status(400).json({ message: "User not found" });
 
-    const success = await bcrypt.compare(password, users[0].hashedPassword); //Again encrypting the password
+    const success = await bcrypt.compare(password, users[0].hashedPassword);
 
-    const token = serverClient.createUserToken(users[0].id); //no longer passing a regular user ID but THAT user id. Creating the new token
+    const token = serverClient.createUserToken(users[0].id);
 
     if (success) {
       res.status(200).json({
@@ -58,9 +58,11 @@ const login = async (req, res) => {
       res.status(500).json({ message: "Incorrect password" });
     }
   } catch (error) {
+    ads;
     console.log(error);
 
     res.status(500).json({ message: error });
   }
 };
+
 module.exports = { signup, login };
