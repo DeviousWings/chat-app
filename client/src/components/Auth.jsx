@@ -115,7 +115,6 @@ const Auth = () => {
               <input
                 name='password'
                 type='password'
-                autoComplete='on'
                 placeholder='Password'
                 onChange={handleChange}
                 required
@@ -127,7 +126,6 @@ const Auth = () => {
                 <input
                   name='confirmPassword'
                   type='password'
-                  autoComplete='on'
                   placeholder='Confirm Password'
                   onChange={handleChange}
                   required
@@ -154,4 +152,5 @@ const Auth = () => {
     </div>
   );
 };
+
 export default Auth;
