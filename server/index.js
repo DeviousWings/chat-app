@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.get("/", (req, res) => {
-  res.send("Hello, Earth!");
+  res.send("Server running on port 5000");
 });
 
 app.use("/auth", authRoutes);

@@ -2,17 +2,17 @@ import React, { useState } from "react";
 import Cookies from "universal-cookie";
 import axios from "axios";
 
-import signinImage from "../assets/signup.jpg";
+import signinImage from "../assets/Moon_Mars.jpg";
 
 const cookies = new Cookies();
 
 const initialState = {
-  firstName: "",
+  fullName: "",
   username: "",
   password: "",
   confirmPassword: "",
   phoneNumber: "",
-  avatarU: "",
+  avatarURL: "",
 };
 
 const Auth = () => {
@@ -26,16 +26,16 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { fullName, username, password, phoneNumber, avatarURL } = form;
+    const { username, password, phoneNumber, avatarURL } = form;
 
     const URL = "http://localhost:5000/auth";
 
     const {
-      data: { token, userId, hashedPassword },
+      data: { token, userId, hashedPassword, fullName },
     } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
       username,
       password,
-      fullName,
+      fullName: form.fullName,
       phoneNumber,
       avatarURL,
     });
